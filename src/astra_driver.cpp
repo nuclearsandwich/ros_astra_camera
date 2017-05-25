@@ -157,7 +157,7 @@ void AstraDriver::advertiseROSTopics()
 {
   rmw_qos_profile_t custom_camera_qos_profile = rmw_qos_profile_default;
 
-  custom_camera_qos_profile.depth = 1;
+  custom_camera_qos_profile.depth = 50;
   custom_camera_qos_profile.reliability = RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT;
   custom_camera_qos_profile.history = RMW_QOS_POLICY_HISTORY_KEEP_LAST;
 
@@ -187,8 +187,8 @@ void AstraDriver::advertiseROSTopics()
     //image_transport::SubscriberStatusCallback itssc = boost::bind(&AstraDriver::colorConnectCb, this);
     //ros::SubscriberStatusCallback rssc = boost::bind(&AstraDriver::colorConnectCb, this);
     //pub_color_ = color_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
-    pub_color_ = nh_->create_publisher<sensor_msgs::msg::Image>("image", custom_camera_qos_profile);
-    this->colorConnectCb();
+    //pub_color_ = nh_->create_publisher<sensor_msgs::msg::Image>("image", custom_camera_qos_profile);
+    //this->colorConnectCb();
   }
 
   if (device_->hasIRSensor())
@@ -196,8 +196,8 @@ void AstraDriver::advertiseROSTopics()
     //image_transport::SubscriberStatusCallback itssc = boost::bind(&AstraDriver::irConnectCb, this);
     //ros::SubscriberStatusCallback rssc = boost::bind(&AstraDriver::irConnectCb, this);
     //pub_ir_ = ir_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
-    pub_ir_ = nh_->create_publisher<sensor_msgs::msg::Image>("ir_image", custom_camera_qos_profile);
-    this->irConnectCb();
+    //pub_ir_ = nh_->create_publisher<sensor_msgs::msg::Image>("ir_image", custom_camera_qos_profile);
+    //this->irConnectCb();
   }
 
   if (device_->hasDepthSensor())
